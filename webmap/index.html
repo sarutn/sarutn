@@ -1,8 +1,24 @@
 <!DOCTYPE html>
 <html lang="th">
+
+<script type="text/javascript">
+	function foo(response) {
+	  var meta = response.meta;
+	  var data = response.data;
+	  console.log(meta);
+	  console.log(data);
+	}
+	
+	var script = document.createElement('script');
+	script.src = 'https://api.github.com?callback=foo';
+	
+	document.getElementsByTagName('head')[0].appendChild(script);
+</script>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,  width=device-width, height=device-height"/>
     <meta name="mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-capable" content="yes/">
@@ -10,7 +26,7 @@
     <meta name="description" content="Web Map"/>
     <meta name="author" content=""/>
     <meta name="keywords" content="Web Map" />
-	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+
 	<title>WEB MAP</title>
 
 	<!-- icon shotcut-->
@@ -1255,12 +1271,17 @@
 
 
 		function check_txt(txt){
+
 			$.ajax({
 	            type:'GET',
-	            url:'http://myapi.infinityfreeapp.com/aiforthai.php?msg='+txt,
+	            //url:'aiforthai.php?msg='+txt,
+				url:'http://myapi.infinityfreeapp.com/aiforthai.php?msg='+txt,
+				//url:'http://myapi.infinityfreeapp.com/curl_0.php',
+
 	            async:false,
 	            crossDomain: true,	
-	            //dataType: 'json',
+	            dataType: 'jsonp',
+
 	            success:function(data){
 					console.log(data)
 				}
