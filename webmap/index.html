@@ -1257,20 +1257,14 @@
 		function check_txt(txt){
 			$.ajax({
 	            type:'GET',
-	            url:'https://herokunutty.herokuapp.com/mongodb.php?act=qm',
+	            url:'http://myapi.infinityfreeapp.com/aiforthai.php?msg='+txt,
 	            async:false,
 	            crossDomain: true,	
-	            dataType: 'json',
-	            /*
-	            data : {
-	                act: 'qm'
-	            },
-	            */
-	            //dataType: 'text',
-	            //processData: false,
-	            //contentType: false,
+	            //dataType: 'json',
 	            success:function(data){
-
+					console.log(data)
+				}
+			})
 
 
 
