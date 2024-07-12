@@ -775,7 +775,7 @@
 	    
 	          $.ajax({
 	            type:'GET',
-	            url:'https://myapi.infinityfreeapp.com/webmap/service/get_data.php',
+	            url:'https://webmapn.000webhostapp.com/webmap/service/get_data.php',
 	            async:false,
 	            crossDomain: true,	
 	            dataType: 'json',
@@ -839,7 +839,7 @@
 	              $.ajax({
 	              type:'POST',
 
-	              url:'https://myapi.infinityfreeapp.com/webmap/service/ade_data.php',
+	              url:'https://webmapn.000webhostapp.com/webmap/service/ade_data.php',
 	              async:false,
 	              crossDomain: true,	
 				  dataType: 'json',
@@ -947,7 +947,7 @@
 	            */
 	              $.ajax({
 	                  type:'POST',
-	                  url: 'https://myapi.infinityfreeapp.com/webmap/service/ade_data.php',
+	                  url: 'https://webmapn.000webhostapp.com/webmap/service/ade_data.php',
 	                  async:false,
 	                  crossDomain: true,	
 	                  dataType: 'json',
@@ -991,7 +991,7 @@
 	                $.ajax({
 	                  type: "POST",
 	                  async: false,
-	                  url: 'https://myapi.infinityfreeapp.com/webmap/service/ade_data.php',
+	                  url: 'https://webmapn.000webhostapp.com/webmap/service/ade_data.php',
 					  crossDomain: true,	
 	                  //data: {act:layer,kwhere: $('#pipeType select option:selected').text(),kgroup:'group by pipetype',ksort: 'asc pipsize',kjoin: 'pwacode'},
 	                  //data: {act:layer,pipeSize: $('#pipeSize').find(":selected").val()},
@@ -1144,7 +1144,7 @@
 
 		$.ajax({
 			type: 'POST',
-			url: 'https://myapi.infinityfreeapp.com/webmap/service/shareToLine.php',
+			url: 'https://webmapn.000webhostapp.com/webmap/service/shareToLine.php',
 			// async:false,
 			dataType: 'json',
 			//dataType: 'text',
@@ -1265,7 +1265,7 @@
 			$.ajax({
 	            type:'GET',
 	            //url:'aiforthai.php?msg='+txt,
-				url:'https://myapi.infinityfreeapp.com/webmap/service/aiforthai.php?msg='+txt,
+				url:'https://webmapn.000webhostapp.com/webmap/service/aiforthai.php?msg='+txt,
 				//url:'https://myapi.infinityfreeapp.com/aiforthai.php?msg='+txt,
 
 	            async:false,
@@ -1293,7 +1293,7 @@
 			}
 			else {
 				$("#send_problem").attr('disabled', 'disabled');
-				$.post('https://myapi.infinityfreeapp.com/webmap/service/problem.php', { device: navigator.userAgent, type: $("#sys_type").text(), detail: $("#txt_detail").val() }, function (data, status) { $("#helpdeskModal").modal('hide'); $("#send_problem").removeAttr('disabled'); });
+				$.post('https://webmapn.000webhostapp.com/webmap/service/problem.php', { device: navigator.userAgent, type: $("#sys_type").text(), detail: $("#txt_detail").val() }, function (data, status) { $("#helpdeskModal").modal('hide'); $("#send_problem").removeAttr('disabled'); });
 			}
 
 		});
@@ -1350,7 +1350,7 @@
 
 					$.ajax({
 								type:'POST',
-								url:'https://myapi.infinityfreeapp.com/webmap/service/sharelocation.php',
+								url:'https://webmapn.000webhostapp.com/webmap/service/sharelocation.php',
 								async:false,
 								dataType: 'json',
 								data:{act:"up",status:status,lat:lat,lng:lng,accuracy:accuracy,timestamp:timestamp,by:$('#username').val()},
@@ -1366,7 +1366,7 @@
 
 					$.ajax({
 								type:'POST',
-								url:'https://myapi.infinityfreeapp.com/webmap/service/sharelocation.php',
+								url:'https://webmapn.000webhostapp.com/webmap/service/sharelocation.php',
 								async:false,
 								dataType: 'json',
 								data:{act:"del",status:status,lat:lat,lng:lng,accuracy:accuracy,timestamp:timestamp,by:$('#username').val()},
@@ -1397,7 +1397,7 @@
 
 					$.ajax({
 								type:'POST',
-								url:'https://myapi.infinityfreeapp.com/webmap/service/sharelocation.php',
+								url:'https://webmapn.000webhostapp.com/webmap/service/sharelocation.php',
 								async:false,
 								dataType: 'json',
 								data:{act:'get'},
