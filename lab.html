@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+        }
+        .login-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .login-container h2 {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <div id="error-message" class="alert alert-danger" style="display: none;"></div>
+        <form id="login-form">
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Login</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // ข้อมูลที่ใช้ตรวจสอบ
+            var validUsername = "admin";
+            var validPassword = "1234";
+
+            // เมื่อผู้ใช้กดปุ่ม Login
+            $("#login-form").on("submit", function(event) {
+                event.preventDefault();
+
+                var username = $("#username").val();
+                var password = $("#password").val();
+
+                // ตรวจสอบว่าข้อมูลถูกต้องหรือไม่
+                if (username === validUsername && password === validPassword) {
+                    alert("Login Successful!");
+                    // สามารถเปลี่ยนเป็นการนำทางไปหน้าหลักได้ เช่น
+                    // window.location.href = "homepage.html";
+                } else {
+                    $("#error-message").text("Invalid username or password.").show();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
