@@ -16,6 +16,7 @@
     }
 </style>
 <script type="text/javascript" src="https://api.longdo.com/map3/?key=edfbcefe7bb376567fdf59cf74cdef8f"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/geojson/0.5.0/geojson.min.js"></script>
 <script>
 var map;
 
@@ -26,39 +27,60 @@ function init() {
         pitch: 45,
     });
 
+    const schoolData = {
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [100.605, 13.759] // พิกัดโรงเรียนบดินทรเดชา 4
+        },
+        "properties": {
+            "name": "โรงเรียนบดินทรเดชา (สิงห์ สิงหเสนี) 4",
+            "phone": "02-xxx-xxxx"
+        }
+    };
+
     map.Event.bind("ready", function () {
-        const scale = 2;
-        const data = [
+        const marker = new longdo.Marker(
+            { lon: schoolData.geometry.coordinates[0], lat: schoolData.geometry.coordinates[1] },
             {
-            coordinates: [100.5, 13.7, 0],
-            scale: [scale, scale, scale],
-            color: [0, 255, 0, 255],
-            translation: [0, 0, 0],
-            },
-        ];
-        const layer = new window.deck.MapboxLayer({
-            id: "scenegraph-layer",
-            type: window.deck.ScenegraphLayer,
-            data,
-            scenegraph:
-            "https://maplibre.org/maplibre-gl-js/docs/assets/34M_17/34M_17.gltf",
-            getPosition: (d) => d.coordinates,
-            getScale: (d) => d.scale,
-            // getColor: (d) => d.color,
-            getTranslation: (d) => d.translation,
-            getOrientation: (d) => d.orientation,
-            opacity: 1,
-            _lighting: "pbr",
-            parameters: {
-                depthTest: true,
-            },
-        });
-        map.Layers.insert("", layer);
+                title: schoolData.properties.name,
+                detail: "โทร: " + schoolData.properties.phone,
+                icon: {
+                    url: 'https://map.longdo.com/mmmap/images/pin_mark.png',
+                    offset: { x: 12, y: 45 }
+                }
+            }
+        );
+        
+        marker.popup = function() {
+            // แสดงโมดาลเมื่อคลิกที่มาร์กเกอร์
+            showModal(schoolData.properties.name, schoolData.properties.phone);
+        };
+        
+        map.Overlays.add(marker);
     });
+}
+
+function showModal(name, phone) {
+    const modal = document.getElementById("infoModal");
+    modal.style.display = "block";
+    document.getElementById("schoolName").innerText = name;
+    document.getElementById("schoolPhone").innerText = phone;
+}
+
+function closeModal() {
+    document.getElementById("infoModal").style.display = "none";
 }
 </script>
 </head>
 <body onload="init();">
     <div id="map"></div>
+
+    <!-- โมดาลแสดงข้อมูลโรงเรียน -->
+    <div id="infoModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:white; padding:20px; box-shadow:0px 4px 8px rgba(0, 0, 0, 0.2);">
+        <h3 id="schoolName"></h3>
+        <p>เบอร์โทร: <span id="schoolPhone"></span></p>
+        <button onclick="closeModal()">ปิด</button>
+    </div>
 </body>
 </html>
