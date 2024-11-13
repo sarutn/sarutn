@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Create Map Sample | Longdo Map</title>
+<style type="text/css">
+    html {
+        height: 100%;
+    }
+    body {
+        margin: 0px;
+        height: 100%;
+    }
+    #map {
+        height: 100%;
+    }
+</style>
+<script type="text/javascript" src="https://api.longdo.com/map3/?key=edfbcefe7bb376567fdf59cf74cdef8f"></script>
+<script>
+var map;
+
+function init() {
+    map = new longdo.Map({
+        placeholder: document.getElementById('map'),
+        zoom: 17,
+        pitch: 45,
+    });
+
+    map.Event.bind("ready", function () {
+        const scale = 2;
+        const data = [
+            {
+            coordinates: [100.5, 13.7, 0],
+            scale: [scale, scale, scale],
+            color: [0, 255, 0, 255],
+            translation: [0, 0, 0],
+            },
+        ];
+        const layer = new window.deck.MapboxLayer({
+            id: "scenegraph-layer",
+            type: window.deck.ScenegraphLayer,
+            data,
+            scenegraph:
+            "https://maplibre.org/maplibre-gl-js/docs/assets/34M_17/34M_17.gltf",
+            getPosition: (d) => d.coordinates,
+            getScale: (d) => d.scale,
+            // getColor: (d) => d.color,
+            getTranslation: (d) => d.translation,
+            getOrientation: (d) => d.orientation,
+            opacity: 1,
+            _lighting: "pbr",
+            parameters: {
+                depthTest: true,
+            },
+        });
+        map.Layers.insert("", layer);
+    });
+}
+</script>
+</head>
+<body onload="init();">
+    <div id="map"></div>
+</body>
+</html>
