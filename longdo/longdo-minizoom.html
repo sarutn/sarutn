@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Map Overview | Longdo Map</title>
+    <style type="text/css">
+      html {
+        height:100%; 
+      }
+      body { 
+        margin:0px;
+        height:100%; 
+      }
+      #mapmain, #mapoverview { 
+        width: 50%; 
+        float: left; 
+        height: 400px; 
+      }
+    </style>
+
+  </head>
+  <body onload="init();">
+      <div id="mapmain"></div>
+      <div id="mapoverview"></div>
+
+
+      <script type="text/javascript" src="https://api.longdo.com/map/?key=edfbcefe7bb376567fdf59cf74cdef8f"></script>
+      <script>
+        var mapmain;
+        var mapoverview;
+  
+        function init() {
+          map = new longdo.Map({
+            placeholder: document.getElementById('mapmain')
+          });
+          mapOverview = new longdo.Map({
+            placeholder: document.getElementById('mapoverview')
+          });
+          
+          mapOverview.Ui.DPad.visible(false);
+          mapOverview.Ui.Zoombar.visible(false);
+          mapOverview.Ui.Geolocation.visible(false);
+          mapOverview.Ui.Toolbar.visible(false);
+          mapOverview.Ui.LayerSelector.visible(false);
+          mapOverview.Ui.Fullscreen.visible(false);
+          mapOverview.Ui.Crosshair.visible(true);
+          mapOverview.Ui.Scale.visible(false);
+          mapOverview.Ui.Mouse.enable(false);
+          mapOverview.Ui.Keyboard.enable(false);
+          mapOverview.zoom(4);
+          mapOverview.location({ lon:100.567340, lat:13.750299 }, true);
+          map.zoom(10);
+          map.location({ lon:100.567340, lat:13.750299 }, true);
+  
+          map.Event.bind('location', function() {
+              var result = map.bound();
+              mapOverview.Overlays.clear();
+  
+              var geomOverview = new longdo.Polygon([
+                  { lon: result.minLon, lat: result.maxLat },
+                  { lon: result.maxLon, lat: result.maxLat },
+                  { lon: result.maxLon, lat: result.minLat },
+                  { lon: result.minLon, lat: result.minLat },
+                ],{
+                  lineWidth: 2,
+                  lineColor: 'rgba(0, 0, 0, 1)',
+                  fillColor: 'rgba(255, 255, 255, 0.0)'
+                });
+  
+              mapOverview.Overlays.add(geomOverview);
+          });
+  
+          map.Event.bind('zoom', function() {
+              var result = map.bound();
+              mapOverview.Overlays.clear();
+  
+              var geomOverview = new longdo.Polygon([
+              
+                  { lon: result.minLon, lat: result.maxLat },
+                  { lon: result.maxLon, lat: result.maxLat },
+                  { lon: result.maxLon, lat: result.minLat },
+                  { lon: result.minLon, lat: result.minLat }
+                ],{
+                  lineWidth: 2,
+                  lineColor: 'rgba(0, 0, 0, 1)',
+                  fillColor: 'rgba(255, 255, 255, 0.0)'
+                });
+  
+              mapOverview.Overlays.add(geomOverview);
+          });
+         }
+        </script>
+
+  </body>
+</html>

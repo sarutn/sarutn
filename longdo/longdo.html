@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Longdo map to Leaflet</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css">
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+        html, body, #map {
+            height: 100%;
+        }
+    </style>
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+    <script type="text/javascript">
+        function init() {
+        var map = L.map("map").setView([13.75318, 100.53173], 13);
+
+        var longdomapserver =
+          "http://ms.longdo.com/mmmap/tile.php?zoom={z}&x={x}&y={y}&key=edfbcefe7bb376567fdf59cf74cdef8f&proj=epsg3857&HD=1";
+         // "http://ms.longdo.com/mmmap/tile.php?zoom={z}&x={x}&y={y}&key=[YOUR-KEY-API]&proj=epsg3857&HD=1";
+          
+        L.tileLayer(longdomapserver, {
+          attribution: "© Longdo Map"
+        }).addTo(map);
+
+
+        var trafficlayer = 'https://mstraffic1.simplethai.net/mmmap/tile.php?proj=epsg3857&mode=trafficoverlay&zoom={z}&x={x}&y={y}&HD=1&key=edfbcefe7bb376567fdf59cf74cdef8f';
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+        L.tileLayer(trafficlayer, {
+            attribution: "© Longdo Traffic Map"
+        }).addTo(map);
+
+
+      }
+    </script>
+</head>
+<body onload="init();">
+    <div id="map" class="map"></div>
+</body>
+</html>

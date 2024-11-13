@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+      <meta charset="UTF-8">
+      <title>Create Traffic Map | Longdo Map</title>
+      <style type="text/css">
+        html{
+          height:100%; 
+        }
+        body{ 
+          margin:0px;
+          height:100%; 
+        }
+        #map {
+          height: 100%;
+        }
+      </style>
+
+      <script type="text/javascript" src="https://api.longdo.com/map/?key=edfbcefe7bb376567fdf59cf74cdef8f"></script>
+      <script>
+        var map;
+        function init() {
+          map = new longdo.Map({
+            layer: [    //ชั้นภาพแผนที่ สามารถแสดงซ้อนกันหลายๆชั้นได้
+              longdo.Layers.GRAY,
+              longdo.Layers.TRAFFIC
+            ],
+            zoom: 10,   //กำหนดระดับการ zoom เริ่มต้น
+            placeholder: document.getElementById('map'), //element ที่ต้องการให้วางแผนที่
+            lastView: false, //ให้แสดงแผนที่ในตำแหน่งสุดท้ายที่ผู้ใช้งานเคยเปิดไว้หรือไม่
+            //language: 'en'
+          });
+          map.Overlays.load(longdo.Overlays.events);
+          map.Overlays.load(longdo.Overlays.cameras);
+
+
+          var TagPanel1 = new longdo.TagPanel();
+          map.Ui.add(TagPanel1);
+
+          //var TagPanel2 = new longdo.TagPanel({ tag: ['temple', 'speed_camera'] });
+          var TagPanel2 = new longdo.TagPanel({ tag: ['speed_camera'] });
+          map.Ui.add(TagPanel2);
+
+
+          //var CustomControl = new longdo.CustomControl({ html: '<button>go</button>' });
+          //map.Ui.add(CustomControl);
+        }
+
+            ////สร้างแผนที่พื้นฐาน
+            //var map = new longdo.Map({
+            //    placeholder: document.getElementById('map')
+            //});
+
+            ////คำสั่ง เพิ่ม/ลบ ชั้นข้อมูลแผนที่จราจร
+                ////Add Traffic Layer
+                //map.Layers.add(longdo.Layers.TRAFFIC);
+                ////Remove Traffic Layer
+                //map.Layers.remove(longdo.Layers.TRAFFIC);
+                ////Clear All Layer
+                //map.Layers.clear();
+
+            ////การเพิ่ม/ลบ เหตุการณ์ต่างๆ
+            ////การเรียกชุดข้อมูล
+            // map.Overlays.load(longdo.Overlays.cameras); // Show Cameras overlay
+            // map.Overlays.load(longdo.Overlays.events); // Show Events overlay
+
+            ////การซ่อนชุดข้อมูล
+            //map.Overlays.unload(longdo.Overlays.cameras); // Hide Cameras overlay
+            //map.Overlays.unload(longdo.Overlays.events); // Hide Events overlay
+
+
+
+      </script>
+  </head>
+  <body onload="init();">
+      <div id="map"></div>
+  </body>
+</html>
